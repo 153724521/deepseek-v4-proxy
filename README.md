@@ -6,12 +6,12 @@
 
 DeepSeek V4 的 Extended Thinking 功能会生成 `reasoning_content` 字段。DeepSeek API 要求在后续对话中，assistant 消息**必须**包含之前的 `reasoning_content`，否则返回 500 错误。
 
-Cursor 的 OpenAI 客户端不会存储和回传 `reasoning_content`，导致多轮对话失败。
+第三方agent通过OPENAI API Base URL使用 DeepSeek V4 模型时，不会存储和回传 `reasoning_content`，导致多轮对话失败。
 
 ## 核心功能
 
 - ✅ **自动缓存 & 回传 reasoning_content**：基于 MD5 哈希匹配，多轮对话不再报错
-- ✅ **流式输出支持**：不影响 Cursor 的打字机渲染效果
+- ✅ **流式输出支持**：不影响第三方agent 的打字机渲染效果 
 - ✅ **智能限流**：内置令牌桶算法，防止突发并发请求打满配额
 - ✅ **429 自动重试**：最多重试 3 次，间隔 3 秒
 - ✅ **工具调用支持**：正确处理 tool_calls 增量累积
